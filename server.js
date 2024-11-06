@@ -1,9 +1,9 @@
-// server.js
+// api/server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');  // Import the cors package
 const dotenv = require('dotenv');
-const doctorRoutes = require('./routes/doctorRoutes');
+const doctorRoutes = require('./routes/doctorRoutes');  // Adjust the path as needed
 
 // Load environment variables from .env file
 dotenv.config();  
@@ -24,8 +24,5 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // Use the doctor routes
 app.use('/api/doctors', doctorRoutes);
 
-// Start the server using the port from environment variable or default to 4000
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Export the express app as a Vercel serverless function handler
+module.exports = app;
